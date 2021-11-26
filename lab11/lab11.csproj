@@ -71,7 +71,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
-    <None Include="Ill.XLSX" />
+    <None Include="ill.XLSX" />
     <None Include="packages.config" />
     <None Include="Recover.XLSX" />
   </ItemGroup>

@@ -154,7 +154,7 @@ namespace lab11
                 try
                 {
                     Application excel = new Application();
-                    Workbook workbook = excel.Workbooks.Open($"{Environment.CurrentDirectory}1.Ill.xlsx");
+                    Workbook workbook = excel.Workbooks.Open($"{Environment.CurrentDirectory}/ill.xlsx");
                     Worksheet worksheet = workbook.Worksheets[1];
                     object[,] readRange = worksheet.Range["A2", "B10"].Value2;
                     Dictionary<string, string> deseases = new Dictionary<string, string>();
@@ -163,7 +163,7 @@ namespace lab11
                         deseases.Add(readRange[i, 1].ToString().ToLower(), readRange[i, 2].ToString());
                     }
                     workbook.Close();
-                    workbook = excel.Workbooks.Open($"{Environment.CurrentDirectory}2.Recover.xlsx");
+                    workbook = excel.Workbooks.Open($"{Environment.CurrentDirectory}/Recover.xlsx");
                     worksheet = workbook.Worksheets[1];
                     readRange = worksheet.Range["G2", "G35"].Value2;
                     for (int i = 1; i <= readRange.Length; i++)
@@ -187,6 +187,7 @@ namespace lab11
                 {
                     Console.WriteLine(ex.Message);
                 }
+            Console.ReadKey();
             }
         }
     }
