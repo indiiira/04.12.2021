@@ -11,123 +11,40 @@ namespace lab
         static void Main(string[] args)
         {
             Console.WriteLine("Task 1");
-            bool flag = true;
-            BankAmount bankAmount = new BankAmount();
-            Console.WriteLine("Создался новый счет!");
-            Console.Write("Введите сберегательный или текущий счет вы хотите установить : ");
-            bankAmount.SetTypeBank(Console.ReadLine());
-            Console.WriteLine();
-            bankAmount.CheckType();
-            Console.WriteLine(string.Format("Ваш уникальный номер {0}", bankAmount.id));
-            Dictionary<SHA256, BankAmount> hashList = new Dictionary<SHA256, BankAmount>();
-            hashList.Add(bankAmount.HashCode, bankAmount);
-            Console.WriteLine();
-            while (flag)
-            {
-                Console.WriteLine("Доступные действия : <перевести> перевести на другой счет; <снять> <положить>(со счета/на счет); <поменять> (сберегательный/текущий) ; <баланс> проверить баланс; <создать> или <удалить аккаунт> аккаунт <выйти> c программы");
-                string command = Console.ReadLine().ToLower();
-                Console.Clear();
+            Console.WriteLine("Упражнение 12.1");
+            Bank a = new Bank(Bank.Type.Current, 1000);
+            Bank b = new Bank(Bank.Type.Saving, 1000);
+            Console.WriteLine(a != b);
+            Console.WriteLine(a.Equals(b));
 
-                switch (command)
-                {
-                    case "снять":
-                        Console.WriteLine("Сколько денег хотите снять?");
-                        decimal money2;
-                        bool flag3 = !decimal.TryParse(Console.ReadLine(), out money2);
-                        if (flag3)
-                        {
-                            Console.WriteLine("Неверный ввод!");
-                        }
-                        bankAmount.GetFromBalance(money2);
-                        break;
-                    case "положить":
-                        Console.WriteLine("Сколько денег хотите положить?");
-                        decimal money;
-                        bool flag2 = !decimal.TryParse(Console.ReadLine(), out money);
-                        if (flag2)
-                        {
-                            Console.WriteLine("Неверный ввод!");
-                        }
-                        bankAmount.GetOnBalance(money);
-                        break;
-                    case "поменять":
-                        bankAmount.SwapBankTypes();
-                        break;
-                    case "баланс":
-                        bankAmount.CheckBalance();
-                        break;
-                    case "выйти":
-                        flag = false;
-                        break;
-                    case "перевести":
-                        Console.WriteLine("Введите сумму перевода");
-                        decimal summ;
-                        while (!decimal.TryParse(Console.ReadLine(), out summ))
-                        {
-                            Console.WriteLine("Неверный ввод");
-                        }
-                        bankAmount.Transaction(summ);
-                        break;
-                    case "создать":
-                        CreatorAccount.CreateAccount(hashList);
-                        Console.WriteLine("Аккаунт создан!");
-                        break;
-                    case "удалить":
-                        Console.WriteLine("По какому id удалить собираетесь удалить?");
-                        Guid id;
-                        if (Guid.TryParse(Console.ReadLine(), out id))
-                        {
-                            CreatorAccount.DeleteAccount(hashList, id);
-                        }
-                        else
-                        {
-                            Console.WriteLine("Неуспешное удаление!");
-                        }
-                        break;
-                }
-                BankAmount.Dispose(bankAmount);
-                Console.ReadKey();
-                Console.Clear();
-            }
-            Console.WriteLine("Task 2");
 
-            Console.WriteLine();
-            Console.WriteLine("Введите высоту дома");
-            uint height;
-            while (!uint.TryParse(Console.ReadLine(), out height))
-            {
-                Console.WriteLine("Неверный ввод!");
-            }
-            Console.WriteLine("Введите этажность дома");
-            uint levels;
-            while (!uint.TryParse(Console.ReadLine(), out levels))
-            {
-                Console.WriteLine("Неверный ввод!");
-            }
-            Console.WriteLine("Введите количество подъездов");
-            uint countEntranence;
-            while (!uint.TryParse(Console.ReadLine(), out countEntranence))
-            {
-                Console.WriteLine("Неверный ввод!");
-            }
-            Console.WriteLine("Введите количество квартир");
-            uint countFlats;
-            while (!uint.TryParse(Console.ReadLine(), out countFlats))
-            {
-                Console.WriteLine("Неверный ввод!");
-            }
-            Console.Clear();
-            Console.WriteLine("Был построен новый дом!Доступна следующая информация:");
-            House house = new House(height, levels, countEntranence, countFlats);
-            house.GetInfo();
-            Console.WriteLine();
-            Console.WriteLine("Высота этажа = " + house.GetHeightLevel().ToString());
-            Console.WriteLine("Среднее кол-во квартир на подъезд = " + house.GetAvgFlatsInEntarances().ToString());
-            Console.WriteLine("Среднее кол-во квартир на этаж = " + house.GetAvgFlatsOnLevel().ToString());
+            Racionalization f = new Racionalization(3, 4);
+            Console.WriteLine("f = {0};\n", f);
+            Racionalization r1 = new Racionalization(4, 8);
+            Console.WriteLine(r1.Equals(0.5));
+            Console.WriteLine(++r1);
+            Console.WriteLine($"({17.0 / 21} < {15.0 / 19})? {new Racionalization(17, 21) < new Racionalization(15, 19)}");
+            Console.WriteLine((Racionalization)0.125);
+            Console.WriteLine(r1 % new Racionalization(5, 4));
+
+            Console.WriteLine("Task 1");
+            Complex z = new Complex(1, 1);
+            Complex z1;
+            Complex c1 = new Complex(20, -7);
+            Complex c2 = new Complex(1, 1);
+            Console.WriteLine(c1 * c2);
+            //z1 = z - (z * z * z - 1) / (3 * z * z);
+            //Console.WriteLine("z1 =  {0}", z1);
+            Array<Book> library = new Array<Book>();
+            library.Add(new Book("Лучшее в нас", "Стивен Пинкер", "Альпина Нон Фикшен"));
+            library.Add(new Book("Биология добра и зла", "Роберт Сапольски", "Альпина Нон Фикшен"));
+            library.Sort(Array<Book>.byName);
             Console.ReadKey();
         }
 
-
     }
-}
+    }
+
+    
+
     

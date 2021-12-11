@@ -4,10 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace lab
+namespace _11
 {
-    interface IBuilder
+    public class Money
     {
-        void BuildDefault();
     }
 }
